@@ -1,0 +1,114 @@
+<?php
+    include 'koneksi.php';
+    session_start();
+    if (empty($_SESSION['username']) or empty($_SESSION['level'])) {
+      echo "<script>alert('Maaf, untuk mengakses halaman ini, anda harus login terlebih dahulu, terima kasih');document.location='index.php'</script>";
+  }
+?>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PT. Sirukam | Data SPK Kriteria</title>
+    <link rel="stylesheet" href="index.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="dashboard">
+        <p>Dashboard</p>
+      </div>
+      <a href="home_pimpinan.php">Home</a>
+      <a href="data_pimpinan_user.php">Data User</a>
+      <a class="active" href="data_pimpinan_alternatif.php">Data SPK</a>
+      <a href="about_spk.php">About</a>
+      <hr>
+      <div class="logout">
+        <a href="logout.php">Logout</a>
+      </div>
+    </div>
+    <div class="content">
+      <div class="head">
+        <h1>Data <b><?= $_SESSION['level'] ?></b></h1>
+        <hr>
+      </div>
+      <div class="cards">
+        <h2>Data SPK</h2><hr>
+        <div class="sub-header">
+          <div class="button1">
+            <p><a href="cetak_pimpinan_kriteria.php">Cetak</a></p>
+          </div>
+          <div class="button2">
+            <p><a href="data_pimpinan_alternatif.php">Alternatif</a></p>
+          </div>
+          <div class="button3">
+            <p><a href="data_pimpinan_kriteria.php">Kriteria</a></p>
+          </div>
+          <div class="button4">
+            <p><a href="data_pimpinan_bobot.php">Bobot</a></p>
+          </div>
+          <div class="button5">
+            <p><a href="data_pimpinan_perhitungan.php">Perhitungan</a></p>
+          </div>
+        </div>
+        <hr>
+        <h3>Kriteria</h3>
+        <table id="tb_data" class="display" style="width:auto;">
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>ID</th>
+              <th>Nama Kriteria</th>
+              <th>Jenis Kriteria</th>
+              <th>Bobot</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php
+              $no = 0;
+              $sql = mysqli_query($koneksi,"select * from tb_kriteria");
+              {
+                while ($hasil = mysqli_fetch_array($sql))
+                {
+                  $no++;
+                  ?>
+                    <tr>
+                      <td style="text-align:center;"><?php echo $no ?></td>
+                      <td style="text-align:center;"><?php echo "$hasil[id_data]" ?></td>
+                      <td><?php echo "$hasil[kriteria]" ?></td>
+                      <td style="text-align:center;"><?php echo "$hasil[jenis_kriteria]" ?></td>
+                      <td style="text-align:center;"><?php echo "$hasil[bobot]" ?></td>
+                    </tr>
+                  <?php
+                }
+              }
+            ?>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th>No.</th>
+              <th>ID</th>
+              <th>Nama Alternatif</th>
+              <th>Jenis Kriteria</th>
+              <th>Bobot</th>
+            </tr>
+          </tfoot>
+        </table>
+        <script>
+          $(document).ready(function() {
+            $("#tb_data").DataTable({responsive:true});
+          });
+        </script>
+      </div>
+      <div class="footer">
+        <p>&copy; Nindi Sri Haryanti 2021-<?= date('Y') ?></p>
+      </div>
+    </div>
+  </body>
+</html>
