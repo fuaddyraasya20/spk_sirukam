@@ -1,2 +1,2 @@
-# spk_sirukam
+# PENERAPAN METODE WEIGHT PRODUCT DALAM SISTEM PENDUKUNG KEPUTUSAN PEMILIHAN PAKAN TERNAK SAPI PERAH YANG TEPAT DI PT SIRUKAM KEC. PAYUNG SEKAKI MENGGUNAKAN BAHASA PEMROGRAMAN PHP DAN DATABASE MYSQL
 Sebuah situs web yang dibuat untuk perusahaan pakan ternak, untuk membantu perusahaan dalam memilih pakan ternak yang baik dengan menggunakan sistem pendukung keputusan dengan metode weight product untuk susu sapi yang berkualitas baik
